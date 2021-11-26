@@ -3,7 +3,7 @@ import { catchError, Observable, switchMap, timer } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { shareHold } from './rxjs.operators';
 
-const str = `/wshfw2_dev/main/`
+const str = `/zsyc/`
 
 const baseHref = str[str.length - 1] === '/' ? str.slice(0, str.length - 1) : str
 

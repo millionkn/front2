@@ -43,6 +43,6 @@ export default defineConfig({
     basePath: '/',
   },
   esbuild: {},
-  base: '/wshfw2_dev/main/',
-  publicPath: '/wshfw2_dev/main/',
+  base: '/zsyc/',
+  publicPath: '/zsyc/',
 });

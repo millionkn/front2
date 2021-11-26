@@ -7,16 +7,16 @@
  */
 export default {
   dev: {
-    '/wshfw2_dev/main/api/': {
+    '/zsyc/api/': {
       target: 'http://192.168.56.3:3000',
       changeOrigin: true,
-      pathRewrite: { '^/wshfw2_dev/main/api': '/api' },
+      pathRewrite: { '^/zsyc/api': '/api' },
     },
-    '/wshfw2_dev/main/socket.io/': {
+    '/zsyc/socket.io/': {
       target: 'http://192.168.56.3:3000',
       changeOrigin: true,
       ws: true,
-      pathRewrite: { '^/wshfw2_dev/main/socket.io': '/socket.io' },
+      pathRewrite: { '^/zsyc/socket.io': '/socket.io' },
     },
   },
   test: {
