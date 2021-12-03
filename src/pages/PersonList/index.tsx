@@ -39,7 +39,7 @@ const TableList: React.FC<{}> = () => {
     {
       title: '日期',
       dataIndex: 'date',
-      renderText: (val) => moment(val).format('YYYY-MM-DD'),
+      renderText: (val) => moment(val).format('YYYY-MM-DD HH:mm:ss'),
       hideInSearch: true
     },
     {

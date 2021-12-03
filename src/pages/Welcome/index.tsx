@@ -93,7 +93,7 @@ export default () => {
           </Card>
         </Col>
         <Col span={6} style={{ display: 'flex' }}>
-          <Card title="本月报警数" className={styles.block} extra={<a href="#">详情</a>} style={{ display: 'flex', flexDirection: 'column' }} bodyStyle={{ flex: 1, display: 'flex', flexDirection: 'column', padding: 0 }}>
+          <Card title="本月报警数" className={styles.block} extra={<Link to="/person-list">详情</Link>} style={{ display: 'flex', flexDirection: 'column' }} bodyStyle={{ flex: 1, display: 'flex', flexDirection: 'column', padding: 0 }}>
             <div style={{ flex: 1, padding: 24, paddingBottom: 0 }}>
               <MiniBar {...miniBarProps}></MiniBar>
             </div>

@@ -232,7 +232,7 @@ export default () => {
               </Form.Item>
             </Form>
           </Modal>
-          <Card className={styles.block} title="环境监测报警记录" extra={<Button onClick={() => setShowThresholdEditor(true)}>编辑</Button>}>
+          <Card className={styles.block} title="环境监测报警记录">
             <Table
               columns={[
                 {

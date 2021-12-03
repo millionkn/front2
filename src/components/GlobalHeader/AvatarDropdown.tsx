@@ -61,10 +61,10 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
         )}
         {menu && <Menu.Divider />}
 
-        <Menu.Item key="logout">
+        {/* <Menu.Item key="logout">
           <LogoutOutlined />
           退出登录
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
     );
     return currentUser && currentUser.name ? (
