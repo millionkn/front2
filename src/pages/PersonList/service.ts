@@ -1,7 +1,7 @@
 import request from 'umi-request';
 
-export async function queryRule() {
-  return request('/api/rule', {});
+export async function queryRule(opt: { page: { index: number, size: number } }) {
+  return request('api/table/person-log', {method:'POST', body: JSON.stringify(opt) });
 }
 
 export async function removeRule() {

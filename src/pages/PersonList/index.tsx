@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
 import { TableListItem } from './data.d';
@@ -16,32 +16,23 @@ const TableList: React.FC<{}> = () => {
     },
     {
       title: '闸机位置',
-      dataIndex: 'mechinePosition',
+      dataIndex: 'deviceIdentify',
       renderText: (val: string) => val,
-      valueEnum: {
-        0: { text: '北辰工地现场西区2号南门' },
-      },
     },
     {
       title: '类别',
-      dataIndex: 'mechineType',
-      renderText: (val) => val,
+      dataIndex: 'regType',
+      renderText: (val) => val === 'idcard' ? '身份证' : val === 'face' ? '刷脸' : '--',
       hideInSearch: true
     },
     {
       title: '人员编号',
-      dataIndex: 'personIdentifity',
+      dataIndex: 'personId',
       renderText: (val) => val,
     },
     {
       title: '姓名',
       dataIndex: 'personName',
-      renderText: (val) => val,
-      hideInSearch: true
-    },
-    {
-      title: '手机号',
-      dataIndex: 'personPhone',
       renderText: (val) => val,
       hideInSearch: true
     },
@@ -53,27 +44,17 @@ const TableList: React.FC<{}> = () => {
     },
     {
       title: '动作',
-      dataIndex: 'action',
-      renderText: (val) => val,
+      dataIndex: 'personAction',
+      renderText: (val) => val === 'in' ? '进入' : val === 'out' ? '枪机' : '--',
       valueEnum: {
         0: { text: '进入' },
         1: { text: '枪机' },
       },
     },
-    {
-      title: '状态',
-      dataIndex: 'state',
-      renderText: (val) => val,
-      hideInSearch: true
-    },
-    {
-      title: '起止日期',
-      dataIndex: 'dateRange',
-      valueType: 'dateTimeRange',
-      hideInTable: true
-    },
   ];
-
+  useEffect(() => {
+    actionRef.current?.reload(true)
+  }, [])
   return (
     <PageContainer title={false} pageHeaderRender={false}>
       <ProTable<TableListItem>
@@ -83,7 +64,8 @@ const TableList: React.FC<{}> = () => {
         search={{
           labelWidth: 120,
         }}
-        request={() => queryRule()}
+        pagination={{ pageSize: 10 }}
+        request={async ({ pageSize, current }) => queryRule({ page: { index: current || 1, size: pageSize || 10 } })}
         columns={columns}
       />
     </PageContainer>

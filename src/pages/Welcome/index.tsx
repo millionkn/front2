@@ -1,5 +1,5 @@
 import { PageContainer } from '@ant-design/pro-layout';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import styles from './index.less';
 import { Row, Col, Progress, List, Avatar, Card, Statistic, Form, DatePicker, Button, Modal } from "antd";
 import { MiniBar, MiniProgress } from '../DashboardAnalysis/components/Charts';
@@ -11,6 +11,9 @@ import dayjs from 'dayjs';
 import moment from 'moment';
 import { useObservable } from '@/services/plantform-utils/react/observableHooks';
 import { socketRequest } from '@/services/plantform-utils/socketRequest';
+import { useAsync } from '@/utils/hooks';
+import axios from 'axios';
+
 
 
 export default () => {
@@ -31,6 +34,23 @@ export default () => {
   const [deadLine, setDeadLine] = useState(() => moment() as moment.Moment | null)
   const [nextDeadLine, setNextDeadLine] = useState(() => deadLine)
   const [showDeadLineEditor, setShowDeadLineEditor] = useState(() => false);
+
+
+  const personLog = useAsync(() => axios.post<{
+    data: {
+      personName: string,
+      date: string,
+      personAction: string,
+      personType: string,
+    }[]
+  }>(`api/table/person-log`, { page: { index: 1, size: 7 } }).then((x) => x.data.data.map((item, i) => ({
+    id: i,
+    name: item.personName,
+    date: dayjs(item.date).format('YYYY-MM-DD'),
+    time: dayjs(item.date).format('HH:mm:ss'),
+    type: item.personAction === 'in' ? '进入' : item.personAction === 'out' ? '枪机' : '--',
+    direction: item.personType === 'whiteList' ? '白名单' : '--'
+  }))), () => [], [])
   return (
     <PageContainer title={false} pageHeaderRender={false}>
       <Modal
@@ -124,7 +144,7 @@ export default () => {
           <Card title="进出管理" className={styles.block} bodyStyle={{ padding: 0 }} extra={<Link to="/person-list">更多</Link>}>
             <List size="large"
               itemLayout="vertical"
-              dataSource={(7).times((i) => ({ id: i, name: `姓名${i + 1}`, date: '2021-01-11', time: '10:00:00', type: '进入', direction: '外墙保温' }))}
+              dataSource={personLog}
               renderItem={(item) => <List.Item style={{ padding: 0 }}>
                 <Row gutter={[0, 8]} style={{ marginTop: 16 }}>
                   <Col offset={1} span={3}>
