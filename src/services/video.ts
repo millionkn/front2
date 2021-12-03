@@ -34,7 +34,7 @@ export function useVideo(index: number) {
       mediacontrol: { seekbar: '#000', buttons: '#FFF' }, //定义进度条和底部暂停等图标的颜色
     });
     videoPlayer.attachTo(video.current);
-    () => { videoPlayer.stop(); videoPlayer.destroy() }
+    return () => { videoPlayer.stop(); videoPlayer.destroy() }
   }, [cache])
   return video
 }
