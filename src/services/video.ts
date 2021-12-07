@@ -12,7 +12,7 @@ export function useVideo(index: number) {
         "channelNo": number,
         "url": string,
       }[],
-    }>(`http://182.92.112.207:8765/getVideourl`, {}).then((res) => {
+    }>(`api/video/list`, {}).then((res) => {
       setCache(new Map(res.data.data.map((x) => [x.channelNo, x.url])))
     })
   }, [])

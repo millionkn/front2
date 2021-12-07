@@ -1,6 +1,15 @@
 export default [
   {
     path: '/',
+    redirect: '/login',
+  },
+  {
+    name: '登录',
+    path: '/login',
+    component: './User/login',
+  },
+  {
+    path: '/',
     component: '../layouts/BasicLayout',
     routes: [
       {

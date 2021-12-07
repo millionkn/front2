@@ -9,8 +9,8 @@ axios.interceptors.response.use((res) => {
 axios.interceptors.request.use((req) => {
   const token = window.localStorage.getItem('auth-token')
   if (token) {
-    req.headers = {
-      ...req.headers,
+    req.params = {
+      ...req.params,
       'auth-token': token,
     }
   }

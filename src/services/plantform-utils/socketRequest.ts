@@ -31,7 +31,7 @@ export function socketRequest<R>(url: string, body: { [key: string]: any }): Obs
       const cancelToken = axios.CancelToken.source()
       const complateCb = () => axios.post(`${baseHref}/${url}`, body, {
         cancelToken: cancelToken.token,
-        headers: {
+        params: {
           'socket-token': socketToken,
           'socket-method-token': socketMethodToken,
         },

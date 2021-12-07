@@ -2,6 +2,8 @@ import { Button, message, notification } from 'antd';
 
 import './utils/declares';
 
+import './services/plantform-utils/authToken';
+
 import React from 'react';
 import { useIntl } from 'umi';
 import defaultSettings from '../config/defaultSettings';
